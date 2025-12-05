@@ -6,7 +6,7 @@ This document defines the complete technical, software, and hardware architectur
 
 ---
 
-1. System Overview
+## 1. System Overview
 
 POPregister is a smart-contract-based electoral register deployed on the Rootstock (RSK) blockchain. It enables permissionless voter self-registration using:
 
@@ -26,7 +26,7 @@ The blockchain itself is the electoral register.
 
 ---
 
-2. Final System Rules (Hard Constraints)
+## 2. Final System Rules (Hard Constraints)
 
 These rules are enforced at the smart contract level:
 
@@ -47,7 +47,7 @@ Administrator Role| None
 
 ---
 
-3. Trust Model
+## 3. Trust Model
 
 POPRegister removes trust in:
 
@@ -65,13 +65,14 @@ And replaces it with trust in:
 
 ---
 
-4. Electoral Register Data Model (On-Chain)
+## 4. Electoral Register Data Model (On-Chain)
 
 Each registration generates one immutable blockchain record.
 
 4.1 Stored Fields
------|-----
+
 Field| Description
+-----|-----
 "election_id"| Unique identifier for a single election
 "lock_txid"| Transaction hash of the rBTC lock
 "amount"| rBTC locked (≥ 0.05 rBTC)
@@ -92,11 +93,12 @@ Field| Description
 
 ---
 
-5. Smart Contract Architecture
+## 5. Smart Contract Architecture
 
 5.1 Core Contracts
------|-----
+
 Contract| Purpose
+-----|-----
 "POPregister.sol"| Main registration and lock contract
 "ElectionFactory.sol"| Deploys isolated election instances
 "TimeLockVault.sol"| Enforces irreversible rBTC locking
@@ -111,9 +113,12 @@ Each election deploys a fresh instance with:
 
 5.2 Core Functions (Abstract Logic)
 
+```
 register(election_id, solokey_pubkey_hash)
   require(msg.value >= 0.05 rBTC)
   require(wallet_is_non_custodial)
+  ```
+  
   lock funds for 21 days
   bind solokey hash to wallet
   emit RegistrationEvent
@@ -136,7 +141,7 @@ There is:
 
 ---
 
-6. Confirmation & Finality
+## 6. Confirmation & Finality
 
 - A registration is only considered valid after:
    - The same number of confirmations required for standard rBTC settlement
@@ -147,7 +152,7 @@ There is:
 
 ---
 
-7. Wallet Requirements (Client Layer)
+## 7. Wallet Requirements (Client Layer)
 
 Only wallets that satisfy all of the following are allowed:
 
@@ -169,7 +174,7 @@ Excluded:
 
 ---
 
-8. Solokey Hardware Role
+## 8. Solokey Hardware Role
 
 The Solokey is the sole voter credential.
 
@@ -192,7 +197,7 @@ The Solokey is the sole voter credential.
 
 ---
 
-9. Registration Flow (Technical)
+## 9. Registration Flow (Technical)
 
 1. User opens POPregister-enabled non-custodial wallet
 2. User inserts Solokey via USB-C
@@ -209,7 +214,7 @@ The Solokey is the sole voter credential.
 
 ---
 
-10. Public Electoral Indexer
+## 10. Public Electoral Indexer
 
 POPregister does not use a central server.
 
@@ -230,7 +235,7 @@ This makes the electoral roll:
 
 ---
 
-11. Voting System Interface (External)
+## 11. Voting System Interface (External)
 
 POPregister does not handle voting.
 
@@ -247,7 +252,7 @@ The external voting system must:
 
 ---
 
-12. GPS & Geo-Fencing (External Layer)
+## 12. GPS & Geo-Fencing (External Layer)
 
 Geo-fencing is handled entirely outside POPregister:
 
@@ -257,7 +262,7 @@ Geo-fencing is handled entirely outside POPregister:
 
 ---
 
-13. Security Model
+## 13. Security Model
 
 13.1 Attacks Prevented
 
@@ -276,7 +281,7 @@ Geo-fencing is handled entirely outside POPregister:
 
 ---
 
-14. Economic Model
+## 14. Economic Model
 
 - Voting rights are backed by real locked rBTC
 - Property acts as:
@@ -288,7 +293,7 @@ Geo-fencing is handled entirely outside POPregister:
 
 ---
 
-15. Upgrade Model
+## 15. Upgrade Model
 
 POPregister v0.1 is:
 
@@ -305,7 +310,7 @@ Any change requires:
 
 ---
 
-16. Legal & Political Position
+## 16. Legal & Political Position
 
 POPRegister is:
 
@@ -319,7 +324,7 @@ Any legal recognition must occur outside the protocol.
 
 ---
 
-17. Version Status
+## 17. Version Status
 
 - Version: v0.1
 - State: Specification frozen
@@ -329,7 +334,7 @@ Any legal recognition must occur outside the protocol.
 
 ---
 
-18. Summary
+** 18. Summary
 
 POPregister v0.1 defines a fully trustless, administrator-free, property-based electoral register secured by:
 
