@@ -4,7 +4,7 @@
 
 This document defines the complete technical, software, and hardware architecture of POPRegister v0.1. It is implementation-ready and reflects the finalized system rules.
 
----
+
 
 ## 1. System Overview
 
@@ -24,7 +24,7 @@ POPregister is:
 
 The blockchain itself is the electoral register.
 
----
+
 
 ## 2. Final System Rules (Hard Constraints)
 
@@ -46,7 +46,7 @@ These rules are enforced at the smart contract level:
 | Administrator Role | None |
 
 
----
+
 
 ## 3. Trust Model
 
@@ -64,7 +64,7 @@ And replaces it with trust in:
 - Locked economic value
 - Open-source smart contracts
 
----
+
 
 ## 4. Electoral Register Data Model (On-Chain)
 
@@ -93,7 +93,7 @@ Each registration generates one immutable blockchain record.
 - Emails
 - GPS locations
 
----
+
 
 ## 5. Smart Contract Architecture
 
@@ -112,7 +112,7 @@ Each election deploys a fresh instance with:
 - Independent lock vault
 - Independent expiry rules
 
----
+
 
 ### 5.2 Core Functions (Abstract Logic)
 
@@ -145,7 +145,7 @@ There is:
 - ❌ No "override()"
 - ❌ No "resetKey()"
 
----
+
 
 ## 6. Confirmation & Finality
 
@@ -156,7 +156,7 @@ There is:
    - Double registration using unconfirmed funds
    - Short-range manipulation
 
----
+
 
 ## 7. Wallet Requirements (Client Layer)
 
@@ -178,7 +178,7 @@ Excluded:
 - Brokers
 - Multi-user vault services
 
----
+
 
 ## 8. Solokey Hardware Role
 
@@ -201,7 +201,7 @@ The Solokey is the sole voter credential.
 - Locked funds still unlock after expiry
 - No recovery path exists
 
----
+
 
 ## 9. Registration Flow (Technical)
 
@@ -218,7 +218,7 @@ The Solokey is the sole voter credential.
    - Emits RegistrationEvent
 8. After final confirmations → registration becomes valid
 
----
+
 
 ## 10. Public Electoral Indexer
 
@@ -239,7 +239,7 @@ This makes the electoral roll:
 - Censorship-resistant
 - Independently verifiable
 
----
+
 
 ## 11. Voting System Interface (External)
 
@@ -256,7 +256,7 @@ The external voting system must:
    - Geo-fencing via GPS device
    - Election-specific scope
 
----
+
 
 ## 12. GPS & Geo-Fencing (External Layer)
 
@@ -266,7 +266,7 @@ Geo-fencing is handled entirely outside POPregister:
 - Voting platform enforces jurisdiction boundaries
 - POPRegister only verifies cryptographic eligibility
 
----
+
 
 ## 13. Security Model
 
@@ -285,7 +285,7 @@ Geo-fencing is handled entirely outside POPregister:
 - Destroyed hardware = no recovery
 - Forgotten wallet seed = no recovery
 
----
+
 
 ## 14. Economic Model
 
@@ -297,7 +297,7 @@ Geo-fencing is handled entirely outside POPregister:
 - Funds are never confiscated
 - Funds always unlock after expiry
 
----
+
 
 ## 15. Upgrade Model
 
@@ -314,7 +314,7 @@ Any change requires:
 - A brand new election
 - A brand new registration cycle
 
----
+
 
 ## 16. Legal & Political Position
 
@@ -328,7 +328,7 @@ POPRegister is:
 
 Any legal recognition must occur outside the protocol.
 
----
+
 
 ## 17. Version Status
 
@@ -338,7 +338,7 @@ Any legal recognition must occur outside the protocol.
 - Admin Keys: None
 - Backdoors: None
 
----
+
 
 ## 18. Summary
 
@@ -353,6 +353,6 @@ It eliminates identity, discretion, revocation, and recovery in favor of:
 
 «Cryptographic certainty and economic finality.»
 
----
+
 
 POPregister_v0.1 — Trust the Code.
