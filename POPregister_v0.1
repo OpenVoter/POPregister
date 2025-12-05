@@ -30,8 +30,8 @@ The blockchain itself is the electoral register.
 
 These rules are enforced at the smart contract level:
 
-Rule| Value
------|-----
+|Rule| Value|
+|-----|-----|
 Minimum Property| "0.05 rBTC"
 Lock Period| "21 days"
 Voting Model| One Solokey = One Vote
@@ -69,10 +69,10 @@ And replaces it with trust in:
 
 Each registration generates one immutable blockchain record.
 
-4.1 Stored Fields
+### 4.1 Stored Fields
 
-Field| Description
------|-----
+|Field| Description|
+|-----|-----|
 "election_id"| Unique identifier for a single election
 "lock_txid"| Transaction hash of the rBTC lock
 "amount"| rBTC locked (≥ 0.05 rBTC)
@@ -81,7 +81,7 @@ Field| Description
 "wallet_address"| Non-custodial wallet address
 "block_height"| Block height of final confirmation
 
-4.2 Explicitly NOT Stored
+### 4.2 Explicitly NOT Stored
 
 - Names
 - Addresses
@@ -95,10 +95,10 @@ Field| Description
 
 ## 5. Smart Contract Architecture
 
-5.1 Core Contracts
+### 5.1 Core Contracts
 
-Contract| Purpose
------|-----
+|Contract| Purpose|
+|-----|-----|
 "POPregister.sol"| Main registration and lock contract
 "ElectionFactory.sol"| Deploys isolated election instances
 "TimeLockVault.sol"| Enforces irreversible rBTC locking
@@ -117,21 +117,23 @@ Each election deploys a fresh instance with:
 register(election_id, solokey_pubkey_hash)
   require(msg.value >= 0.05 rBTC)
   require(wallet_is_non_custodial)
-  ```
-  
   lock funds for 21 days
   bind solokey hash to wallet
   emit RegistrationEvent
+```
 
+```
 isEligible(election_id, solokey_pubkey_hash) → bool
   verify lock exists
   verify lock not expired
-  verify key hash matches
+  verify key hash matches 
+```
 
+```
 withdraw()
   require(block.timestamp > lock_expiry)
   release locked rBTC
-
+```
 There is:
 
 - ❌ No "revoke()"
@@ -178,18 +180,18 @@ Excluded:
 
 The Solokey is the sole voter credential.
 
-8.1 Solokey Properties
+### 8.1 Solokey Properties
 
 - Physical USB authentication device
 - Stores a single private key securely
 - Performs on-device cryptographic signing
 - Private key never leaves the device
 
-8.2 Binding Rule
+### 8.2 Binding Rule
 
 - One Solokey → One wallet → One registration → One vote
 
-8.3 Loss Model
+### 8.3 Loss Model
 
 - Lost Solokey = Permanent loss of voting right for that election
 - Locked funds still unlock after expiry
@@ -264,7 +266,7 @@ Geo-fencing is handled entirely outside POPregister:
 
 ## 13. Security Model
 
-13.1 Attacks Prevented
+### 13.1 Attacks Prevented
 
 - Sybil attacks → blocked by real property lock
 - Identity fraud → blocked by physical key
@@ -273,7 +275,7 @@ Geo-fencing is handled entirely outside POPregister:
 - Voter suppression → no revocation
 - Last-minute blocking → registration always open
 
-13.2 Attacks Accepted by Design
+### 13.2 Attacks Accepted by Design
 
 - Lost key = lost vote
 - Destroyed hardware = no recovery
@@ -334,7 +336,7 @@ Any legal recognition must occur outside the protocol.
 
 ---
 
-** 18. Summary
+## 18. Summary
 
 POPregister v0.1 defines a fully trustless, administrator-free, property-based electoral register secured by:
 
