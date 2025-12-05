@@ -123,20 +123,17 @@ register(election_id, solokey_pubkey_hash)
   lock funds for 21 days
   bind solokey hash to wallet
   emit RegistrationEvent
-```
 
-```
 isEligible(election_id, solokey_pubkey_hash) → bool
   verify lock exists
   verify lock not expired
   verify key hash matches 
-```
 
-```
 withdraw()
   require(block.timestamp > lock_expiry)
   release locked rBTC
 ```
+
 There is:
 
 - ❌ No "revoke()"
