@@ -31,6 +31,7 @@ The blockchain itself is the electoral register.
 These rules are enforced at the smart contract level:
 
 Rule| Value
+-----|-----
 Minimum Property| "0.05 rBTC"
 Lock Period| "21 days"
 Voting Model| One Solokey = One Vote
@@ -69,7 +70,7 @@ And replaces it with trust in:
 Each registration generates one immutable blockchain record.
 
 4.1 Stored Fields
-
+-----|-----
 Field| Description
 "election_id"| Unique identifier for a single election
 "lock_txid"| Transaction hash of the rBTC lock
@@ -94,7 +95,7 @@ Field| Description
 5. Smart Contract Architecture
 
 5.1 Core Contracts
-
+-----|-----
 Contract| Purpose
 "POPregister.sol"| Main registration and lock contract
 "ElectionFactory.sol"| Deploys isolated election instances
