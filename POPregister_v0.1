@@ -32,18 +32,18 @@ These rules are enforced at the smart contract level:
 
 |Rule| Value|
 |-----|-----|
-Minimum Property| "0.05 rBTC"
-Lock Period| "21 days"
-Voting Model| One Solokey = One Vote
-Wallet Type| Non-custodial only
-Custody| User-controlled private keys only
-Registration Timing| Last-minute allowed
-Confirmations| Same as standard financial settlement
-Early Withdrawal| Not allowed
-Key Recovery| Not possible
-Credential Revocation| Not possible
-Election Scope| New registration required per election
-Administrator Role| None
+|Minimum Property| "0.05 rBTC"|
+|Lock Period| "21 days"|
+|Voting Model| One Solokey = One Vote|
+|Wallet Type| Non-custodial only|
+|Custody| User-controlled private keys only|
+|Registration Timing| Last-minute allowed|
+|Confirmations| Same as standard financial settlement|
+|Early Withdrawal| Not allowed|
+|Key Recovery| Not possible|
+|Credential Revocation| Not possible|
+|Election Scope| New registration required per election|
+|Administrator Role| None|
 
 ---
 
@@ -73,13 +73,13 @@ Each registration generates one immutable blockchain record.
 
 |Field| Description|
 |-----|-----|
-"election_id"| Unique identifier for a single election
-"lock_txid"| Transaction hash of the rBTC lock
-"amount"| rBTC locked (≥ 0.05 rBTC)
-"lock_expiry"| UNIX timestamp of unlock time
-"solokey_pubkey_hash"| Hash of Solokey public key
-"wallet_address"| Non-custodial wallet address
-"block_height"| Block height of final confirmation
+|"election_id"| Unique identifier for a single election|
+|"lock_txid"| Transaction hash of the rBTC lock|
+|"amount"| rBTC locked (≥ 0.05 rBTC)|
+|"lock_expiry"| UNIX timestamp of unlock time|
+|"solokey_pubkey_hash"| Hash of Solokey public key|
+|"wallet_address"| Non-custodial wallet address|
+|"block_height"| Block height of final confirmation|
 
 ### 4.2 Explicitly NOT Stored
 
@@ -99,9 +99,9 @@ Each registration generates one immutable blockchain record.
 
 |Contract| Purpose|
 |-----|-----|
-"POPregister.sol"| Main registration and lock contract
-"ElectionFactory.sol"| Deploys isolated election instances
-"TimeLockVault.sol"| Enforces irreversible rBTC locking
+|"POPregister.sol"| Main registration and lock contract|
+|"ElectionFactory.sol"| Deploys isolated election instances|
+|"TimeLockVault.sol"| Enforces irreversible rBTC locking|
 
 Each election deploys a fresh instance with:
 
