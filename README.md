@@ -18,9 +18,9 @@ There are:
 Only:
 Code. Property. And a physical cryptographic key.
 
----
 
-Core Principle
+
+## Core Principle
 
 «One Key. One Vote. One Election.»
 
@@ -30,7 +30,7 @@ Core Principle
 - If your funds are locked → they stay locked until expiry.
 - No one can override the rules.
 
----
+
 
 ## What POPregister Is
 
@@ -51,7 +51,7 @@ It does this by recording:
 
 All of this is enforced directly by Rootstock smart contracts.
 
----
+
 
 ## What POPregister Is Not
 
@@ -78,7 +78,7 @@ It does not store:
 
 It only stores cryptographic facts about property and keys.
 
----
+
 
 ## Final System Rules
 
@@ -96,7 +96,7 @@ These rules are enforced by code and cannot be changed without deploying a new v
 - Administrator powers: None
 - Each election: Fully separate registration required
 
----
+
 
 ## How the Electoral Register Exists
 
@@ -114,7 +114,7 @@ Instead:
 
 The blockchain is the register.
 
----
+
 
 ## High-Level Registration Flow
 
@@ -130,7 +130,7 @@ No accounts.
 No identity checks.
 No administrators.
 
----
+
 
 ## High-Level Voting Flow
 
@@ -146,7 +146,7 @@ This allows:
 - Hardware-secured voting
 - Fully auditable results
 
----
+
 
 ## Trust Model
 
@@ -164,7 +164,7 @@ With:
 
 This is property-based suffrage enforced by math.
 
----
+
 
 ## Intended Use Cases
 
@@ -175,7 +175,7 @@ This is property-based suffrage enforced by math.
 - Decentralized civic experiments
 - High-trust on-chain governance
 
----
+
 
 ## Project Status
 
@@ -188,7 +188,7 @@ This is property-based suffrage enforced by math.
 - 🔄 Mobile wallet integration in progress
 - 🔄 Public indexer in progress
 
----
+
 
 ## License & Ethos
 
@@ -202,7 +202,7 @@ POPregister is intended to be:
 
 There is no privileged operator.
 
----
+
 
 ## Next Document
 
@@ -215,6 +215,6 @@ See "POPregister_v0.1.md" for:
 - Indexer design
 - Voting system interface
 
----
+
 
 POPRegister — Trust the Code.
