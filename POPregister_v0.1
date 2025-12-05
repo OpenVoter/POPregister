@@ -1,0 +1,346 @@
+POPregister_v0.1
+
+Proof of Property Electoral Register — Technical Specification
+
+This document defines the complete technical, software, and hardware architecture of POPRegister v0.1. It is implementation-ready and reflects the finalized system rules.
+
+---
+
+1. System Overview
+
+POPregister is a smart-contract-based electoral register deployed on the Rootstock (RSK) blockchain. It enables permissionless voter self-registration using:
+
+- Locked rBTC as digital property
+- A single physical Solokey as a hardware voter credential
+- A non-custodial wallet as the only valid client
+
+POPRegister is:
+
+- Public
+- Permissionless
+- Non-revocable
+- Non-recoverable
+- Administrator-free
+
+The blockchain itself is the electoral register.
+
+---
+
+2. Final System Rules (Hard Constraints)
+
+These rules are enforced at the smart contract level:
+
+Rule| Value
+Minimum Property| "0.05 rBTC"
+Lock Period| "21 days"
+Voting Model| One Solokey = One Vote
+Wallet Type| Non-custodial only
+Custody| User-controlled private keys only
+Registration Timing| Last-minute allowed
+Confirmations| Same as standard financial settlement
+Early Withdrawal| Not allowed
+Key Recovery| Not possible
+Credential Revocation| Not possible
+Election Scope| New registration required per election
+Administrator Role| None
+
+---
+
+3. Trust Model
+
+POPRegister removes trust in:
+
+- Governments
+- Electoral commissions
+- Platform operators
+- Identity providers
+
+And replaces it with trust in:
+
+- Cryptographic signatures
+- Physical possession of a Solokey
+- Locked economic value
+- Open-source smart contracts
+
+---
+
+4. Electoral Register Data Model (On-Chain)
+
+Each registration generates one immutable blockchain record.
+
+4.1 Stored Fields
+
+Field| Description
+"election_id"| Unique identifier for a single election
+"lock_txid"| Transaction hash of the rBTC lock
+"amount"| rBTC locked (≥ 0.05 rBTC)
+"lock_expiry"| UNIX timestamp of unlock time
+"solokey_pubkey_hash"| Hash of Solokey public key
+"wallet_address"| Non-custodial wallet address
+"block_height"| Block height of final confirmation
+
+4.2 Explicitly NOT Stored
+
+- Names
+- Addresses
+- Passport/ID numbers
+- Biometrics
+- Phone numbers
+- Emails
+- GPS locations
+
+---
+
+5. Smart Contract Architecture
+
+5.1 Core Contracts
+
+Contract| Purpose
+"POPregister.sol"| Main registration and lock contract
+"ElectionFactory.sol"| Deploys isolated election instances
+"TimeLockVault.sol"| Enforces irreversible rBTC locking
+
+Each election deploys a fresh instance with:
+
+- Independent voter roll
+- Independent lock vault
+- Independent expiry rules
+
+---
+
+5.2 Core Functions (Abstract Logic)
+
+register(election_id, solokey_pubkey_hash)
+  require(msg.value >= 0.05 rBTC)
+  require(wallet_is_non_custodial)
+  lock funds for 21 days
+  bind solokey hash to wallet
+  emit RegistrationEvent
+
+isEligible(election_id, solokey_pubkey_hash) → bool
+  verify lock exists
+  verify lock not expired
+  verify key hash matches
+
+withdraw()
+  require(block.timestamp > lock_expiry)
+  release locked rBTC
+
+There is:
+
+- ❌ No "revoke()"
+- ❌ No "adminWithdraw()"
+- ❌ No "override()"
+- ❌ No "resetKey()"
+
+---
+
+6. Confirmation & Finality
+
+- A registration is only considered valid after:
+   - The same number of confirmations required for standard rBTC settlement
+- Prevents:
+   - Chain reorganizations
+   - Double registration using unconfirmed funds
+   - Short-range manipulation
+
+---
+
+7. Wallet Requirements (Client Layer)
+
+Only wallets that satisfy all of the following are allowed:
+
+- ✅ Non-custodial
+- ✅ User controls private keys
+- ✅ Can sign arbitrary messages
+- ✅ Can interact directly with Rootstock
+- ✅ Supports USB-C Solokey connection
+- ✅ Can enforce irreversible timelocks
+
+Excluded:
+
+- Exchanges
+- Banks
+- Custodial apps
+- ETFs
+- Brokers
+- Multi-user vault services
+
+---
+
+8. Solokey Hardware Role
+
+The Solokey is the sole voter credential.
+
+8.1 Solokey Properties
+
+- Physical USB authentication device
+- Stores a single private key securely
+- Performs on-device cryptographic signing
+- Private key never leaves the device
+
+8.2 Binding Rule
+
+- One Solokey → One wallet → One registration → One vote
+
+8.3 Loss Model
+
+- Lost Solokey = Permanent loss of voting right for that election
+- Locked funds still unlock after expiry
+- No recovery path exists
+
+---
+
+9. Registration Flow (Technical)
+
+1. User opens POPregister-enabled non-custodial wallet
+2. User inserts Solokey via USB-C
+3. Wallet retrieves Solokey public key
+4. Wallet hashes public key
+5. Wallet constructs "register()" transaction
+6. Wallet sends "0.05 rBTC" into TimeLockVault
+7. Smart contract:
+   - Enforces amount
+   - Enforces 21-day lock
+   - Stores key hash
+   - Emits RegistrationEvent
+8. After final confirmations → registration becomes valid
+
+---
+
+10. Public Electoral Indexer
+
+POPregister does not use a central server.
+
+Instead:
+
+- Anyone can run an indexer
+- The indexer:
+   - Scans POPregister contracts
+   - Listens for "RegistrationEvent"
+   - Rebuilds the voter roll deterministically
+- Voting platforms query indexers or their own full node
+
+This makes the electoral roll:
+
+- Public
+- Censorship-resistant
+- Independently verifiable
+
+---
+
+11. Voting System Interface (External)
+
+POPregister does not handle voting.
+
+The external voting system must:
+
+1. Request a Solokey signature
+2. Verify Solokey public key
+3. Query POPregister contract:
+   - "isEligible(election_id, solokey_pubkey_hash)"
+4. Enforce:
+   - One vote per verified key
+   - Geo-fencing via GPS device
+   - Election-specific scope
+
+---
+
+12. GPS & Geo-Fencing (External Layer)
+
+Geo-fencing is handled entirely outside POPregister:
+
+- Voting device provides GPS coordinates
+- Voting platform enforces jurisdiction boundaries
+- POPRegister only verifies cryptographic eligibility
+
+---
+
+13. Security Model
+
+13.1 Attacks Prevented
+
+- Sybil attacks → blocked by real property lock
+- Identity fraud → blocked by physical key
+- Database tampering → blocked by blockchain
+- Admin abuse → impossible (no admins)
+- Voter suppression → no revocation
+- Last-minute blocking → registration always open
+
+13.2 Attacks Accepted by Design
+
+- Lost key = lost vote
+- Destroyed hardware = no recovery
+- Forgotten wallet seed = no recovery
+
+---
+
+14. Economic Model
+
+- Voting rights are backed by real locked rBTC
+- Property acts as:
+   - Anti-spam mechanism
+   - Anti-Sybil mechanism
+   - Anti-automation mechanism
+- Funds are never confiscated
+- Funds always unlock after expiry
+
+---
+
+15. Upgrade Model
+
+POPregister v0.1 is:
+
+- Immutable after deployment
+- Non-upgradable
+- Non-patchable
+- Non-governable
+
+Any change requires:
+
+- A brand new contract version
+- A brand new election
+- A brand new registration cycle
+
+---
+
+16. Legal & Political Position
+
+POPRegister is:
+
+- Stateless
+- Jurisdiction-agnostic
+- Operatorless
+- Open-source
+- Neutral infrastructure
+
+Any legal recognition must occur outside the protocol.
+
+---
+
+17. Version Status
+
+- Version: v0.1
+- State: Specification frozen
+- Governance: None
+- Admin Keys: None
+- Backdoors: None
+
+---
+
+18. Summary
+
+POPregister v0.1 defines a fully trustless, administrator-free, property-based electoral register secured by:
+
+- Rootstock smart contracts
+- Locked rBTC
+- Physical Solokeys
+- Public auditability
+
+It eliminates identity, discretion, revocation, and recovery in favor of:
+
+«Cryptographic certainty and economic finality.»
+
+---
+
+POPregister_v0.1 — Trust the Code.
