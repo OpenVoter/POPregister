@@ -5,7 +5,7 @@
 
 POPregister is a fully decentralized, permissionless, blockchain-based electoral register built on the Rootstock blockchain using smart contracts.
 
-It allows anyone to self-register to vote by locking real digital property (rBTC)—which can be obtained by exchanging Bitcoin 1:1—and binding that lock to a single physical Solokey/SoloSeed authentication key.
+It allows anyone to self-register to vote by locking real digital property (rBTC)—which can be obtained by exchanging Bitcoin 1:1 for rBTC and binding the locked funds to a single physical Solokey/SoloSeed authentication key.
 
 There are:
 
