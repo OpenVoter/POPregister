@@ -16,7 +16,7 @@ There are:
 - No institutional gatekeepers
 
 Only:
-Code. Property. And a physical cryptographic key.
+Code. Digital property. And a physical cryptographic key.
 
 
 
