@@ -351,5 +351,4 @@ POPregister v0.1 defines a fully trustless, administrator-free, property-based e
 
 It eliminates identity, discretion, revocation, and recovery in favor of cryptographic certainty and economic finality.
 
-
-## End of POPregister_v0.1 
+**End of POPregister_v0.1**
