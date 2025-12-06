@@ -349,10 +349,7 @@ POPregister v0.1 defines a fully trustless, administrator-free, property-based e
 - Physical Solokeys
 - Public auditability
 
-It eliminates identity, discretion, revocation, and recovery in favor of:
-
-«Cryptographic certainty and economic finality.»
+It eliminates identity, discretion, revocation, and recovery in favor of cryptographic certainty and economic finality.
 
 
-
-POPregister_v0.1 — Trust the Code.
+## End of POPregister_v0.1 
