@@ -2,7 +2,7 @@
 
 ## Proof of Property Electoral Register — Technical Specification
 
-This document defines the complete technical, software, and hardware architecture of POPRegister v0.1. It is implementation-ready and reflects the finalized system rules.
+This document defines the complete technical, software, and hardware architecture of POPregister v0.1. It is implementation-ready and reflects the finalized system rules.
 
 
 
@@ -50,7 +50,7 @@ These rules are enforced at the smart contract level:
 
 ## 3. Trust Model
 
-POPRegister removes trust in:
+POPregister removes trust in:
 
 - Governments
 - Electoral commissions
@@ -328,15 +328,6 @@ POPRegister is:
 
 Any legal recognition must occur outside the protocol.
 
-
-
-## 17. Version Status
-
-- Version: v0.1
-- State: Specification frozen
-- Governance: None
-- Admin Keys: None
-- Backdoors: None
 
 
 
