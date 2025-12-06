@@ -26,7 +26,7 @@ The blockchain itself is the electoral register.
 
 
 
-## 2. Final System Rules (Hard Constraints)
+## 2. System Rules (Hard Constraints)
 
 These rules are enforced at the smart contract level:
 
